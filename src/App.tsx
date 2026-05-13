@@ -531,7 +531,7 @@ export default function App() {
 
   const pricePerSqm = useMemo(() => (activeDoc?.clientType === ClientType.STAFF ? 65 : 75), [activeDoc?.clientType]);
   const baseCost = useMemo(() => round2((activeDoc?.client.standSize ?? 400) * pricePerSqm), [activeDoc?.client.standSize, pricePerSqm]);
-  const vatAmount = useMemo(() => round2(baseCost * 0.15), [baseCost]);
+  const vatAmount = useMemo(() => round2(baseCost * 0.155), [baseCost]);
   const propertyValue = useMemo(() => round2(baseCost + vatAmount), [baseCost, vatAmount]);
   const openingBalance = useMemo(
     () => activeDoc ? (activeDoc.clientType === ClientType.STAFF ? propertyValue : round2(propertyValue - (activeDoc.deposit ?? 0))) : 0,
@@ -941,7 +941,7 @@ export default function App() {
                 <Section title="Property Pricing">
                   <div className="space-y-1.5 text-[11px]">
                     <div className="flex justify-between"><span className="text-gray-400">Price/sqm</span><span className="font-bold text-[#1e295b]">${pricePerSqm}.00</span></div>
-                    <div className="flex justify-between"><span className="text-gray-400">VAT</span><span className="font-bold text-[#1e295b]">15%</span></div>
+                    <div className="flex justify-between"><span className="text-gray-400">VAT</span><span className="font-bold text-[#1e295b]">15.5%</span></div>
                     <div className="flex justify-between"><span className="text-gray-400">Base Cost</span><span className="font-bold text-[#1e295b]">${formatMoney(baseCost)}</span></div>
                     <div className="flex justify-between"><span className="text-gray-400">VAT Amount</span><span className="font-bold text-[#d40000]">${formatMoney(vatAmount)}</span></div>
                     <div className="flex justify-between border-t border-gray-200 pt-1.5"><span className="font-bold text-gray-700">Property Value</span><span className="font-bold text-[#d40000]">${formatMoney(propertyValue)}</span></div>
